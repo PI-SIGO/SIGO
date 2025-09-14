@@ -1,0 +1,93 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build results
+bin/
+obj/
+Debug/
+Release/
+
+# Rider
+.idea/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Dotnet
+*.dbmdl
+*.bak
+*.backup
+*.log
+*.vsix
+*.psess
+*.vsp
+*.vsmdi
+*.cache
+*.suo
+*.pdb
+*.publishsettings
+
+# Resharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# DotCover
+*.dotCover
+
+# TeamCity
+.teamcity/
+
+# JetBrains Rider
+.idea/
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# ASP.NET temporary files
+*.cache
+*.dll
+*.exe
+*.pdb
+
+# DotNet CLI
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Entity Framework
+*.db
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# OneDrive
+~$*
+~*.tmp
+*.tmp
+*.bak
+*.log
+*.gid
+
+# Node
+node_modules/
+wwwroot/node_modules/
+
+# End of generated rules
