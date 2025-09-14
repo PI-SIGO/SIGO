@@ -17,6 +17,10 @@ namespace SIGO.Services.Entities
             _clienteRepository = clienteRepository;
             _mapper = mapper;
         }
-        
+        public override async Task<IEnumerable<ClienteDTO>> GetAll()
+        {
+            var entities = await _clienteRepository.Get();
+            return _mapper.Map<IEnumerable<ClienteDTO>>(entities);
+        }
     }
 }

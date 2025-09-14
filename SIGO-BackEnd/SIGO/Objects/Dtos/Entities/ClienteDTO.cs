@@ -22,6 +22,8 @@
         public int Situacao { get; set; }
 
         public List<TelefoneDTO> Telefones { get; set; } = new();
-        public List<EnderecoDTO> Enderecos { get; set; } = new();
+        public List<EnderecoClienteDTO> Enderecos { get; set; } = new();
+
+
     }
 }

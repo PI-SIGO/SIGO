@@ -21,5 +21,16 @@ namespace SIGO.Controllers
             _response = new Response();
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var clienteDTO = await _clienteService.GetAll();
+
+            _response.Code = ResponseEnum.SUCCESS;
+            _response.Data = clienteDTO;
+            _response.Message = "Clientes listados com sucesso";
+
+            return Ok(_response);
+        }
     }
 }

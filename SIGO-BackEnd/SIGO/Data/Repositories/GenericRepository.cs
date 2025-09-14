@@ -19,6 +19,7 @@ namespace SIGO.Data.Repositories
             return await _dbSet.ToListAsync();
         }
 
+
         public async Task<T> GetById(int id)
         {
             return await _dbSet.FindAsync(id);
