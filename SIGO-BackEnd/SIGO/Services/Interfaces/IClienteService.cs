@@ -3,7 +3,7 @@ using SIGO.Objects.Models;
 
 namespace SIGO.Services.Interfaces
 {
-    internal interface IClienteService : IGenericService<Cliente, ClienteDTO>
+    public interface IClienteService : IGenericService<Cliente, ClienteDTO>
     {
  
     }
