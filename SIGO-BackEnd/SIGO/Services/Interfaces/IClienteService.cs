@@ -5,6 +5,7 @@ namespace SIGO.Services.Interfaces
 {
     public interface IClienteService : IGenericService<Cliente, ClienteDTO>
     {
- 
+        Task<IEnumerable<ClienteDTO>> GetByNameWithDetails(string nome);
+        Task<ClienteDTO?> GetByIdWithDetails(int id);
     }
 }
