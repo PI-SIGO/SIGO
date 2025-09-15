@@ -22,5 +22,23 @@ namespace SIGO.Services.Entities
             var entities = await _clienteRepository.Get();
             return _mapper.Map<IEnumerable<ClienteDTO>>(entities);
         }
+
+        public async Task<ClienteDTO?> GetByIdWithDetails(int id)
+        {
+            var entity = await _clienteRepository.GetByIdWithDetails(id);
+            return _mapper.Map<ClienteDTO?>(entity);
+        }
+
+        public async Task<IEnumerable<ClienteDTO>> GetByNameWithDetails(string nome)
+        {
+            var entities = await _clienteRepository.GetByNameWithDetails(nome);
+            return _mapper.Map<IEnumerable<ClienteDTO>>(entities);
+        }
+
+        public async Task<ClienteDTO?> GetById(int id)
+        {
+            var entity = await _clienteRepository.GetById(id);
+            return _mapper.Map<ClienteDTO?>(entity);
+        }
     }
 }
