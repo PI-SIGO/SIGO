@@ -3,7 +3,9 @@
     public class TelefoneDTO
     {
         public int Id { get; set; }
-        public string Telefone { get; set; }
+
+        public string Numero { get; set; }
+
         public int DDD { get; set; }
 
         public int ClienteId { get; set; }
