@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using SIGO.Objects.Dtos.Entities;
 using SIGO.Objects.Models;
 

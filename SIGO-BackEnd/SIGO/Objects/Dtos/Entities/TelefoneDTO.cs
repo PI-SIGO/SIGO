@@ -1,4 +1,4 @@
-﻿namespace SIGO.Objects.Dtos.Entities
+namespace SIGO.Objects.Dtos.Entities
 {
     public class TelefoneDTO
     {

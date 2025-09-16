@@ -14,6 +14,5 @@ namespace SIGO.Objects.Dtos.Entities
         public string Estado { get; set; }
         public string Pais { get; set; }
 
-        public ICollection<EnderecoCliente> enderecoclientes { get; set; } = new List<EnderecoCliente>();
     }
 }
