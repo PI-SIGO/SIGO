@@ -24,6 +24,7 @@ namespace SIGO.Objects.Dtos.Entities
         public string Bairro { get; set; }
         public string Estado { get; set; }
         public string Pais { get; set; }
+        public string Complemento { get; set; }
 
         public int Sexo { get; set; }
         public int TipoCliente { get; set; }

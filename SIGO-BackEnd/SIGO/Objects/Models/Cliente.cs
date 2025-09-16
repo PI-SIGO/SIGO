@@ -54,6 +54,9 @@ namespace SIGO.Objects.Models
         [Column("pais")]
         public string Pais { get; set; }
 
+        [Column("complemento")]
+        public string Complemento { get; set; }
+
         [Column("tipocliente")]
         public TipoCliente TipoCliente { get; set; }
 
