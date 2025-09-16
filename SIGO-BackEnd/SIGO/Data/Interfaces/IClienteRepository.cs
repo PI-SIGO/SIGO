@@ -6,5 +6,6 @@ namespace SIGO.Data.Interfaces
     {
         Task<IEnumerable<Cliente>> GetByNameWithDetails(string nome);
         Task<Cliente?> GetByIdWithDetails(int id);
+        Task<Cliente> Add(Cliente cliente);
     }
 }

@@ -40,5 +40,12 @@ namespace SIGO.Services.Entities
             var entity = await _clienteRepository.GetById(id);
             return _mapper.Map<ClienteDTO?>(entity);
         }
+
+        public async Task<ClienteDTO> Create(ClienteDTO clienteDTO)
+        {
+            var cliente = _mapper.Map<Cliente>(clienteDTO);
+            cliente = await _clienteRepository.Add(cliente);
+            return _mapper.Map<ClienteDTO>(cliente);
+        }
     }
 }

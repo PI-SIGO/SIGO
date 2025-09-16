@@ -15,8 +15,6 @@ namespace SIGO.Data.Repositories
         public override async Task<IEnumerable<Cliente>> Get()
         {
             return await _context.Clientes
-                .Include(c => c.EnderecoClientes)
-                    .ThenInclude(ec => ec.Endereco)
                 .Include(c => c.Telefones)
                 .ToListAsync();
         }
@@ -24,8 +22,6 @@ namespace SIGO.Data.Repositories
         public async Task<Cliente?> GetByIdWithDetails(int id)
         {
             return await _context.Clientes
-                .Include(c => c.EnderecoClientes)
-                    .ThenInclude(ec => ec.Endereco)
                 .Include(c => c.Telefones)
                 .FirstOrDefaultAsync(c => c.Id == id);
         }
@@ -33,8 +29,6 @@ namespace SIGO.Data.Repositories
         public async Task<IEnumerable<Cliente>> GetByNameWithDetails(string nome)
         {
             return await _context.Clientes
-                .Include(c => c.EnderecoClientes)
-                    .ThenInclude(ec => ec.Endereco)
                 .Include(c => c.Telefones)
                 .Where(c => c.Nome.Contains(nome))
                 .ToListAsync();
@@ -46,5 +40,11 @@ namespace SIGO.Data.Repositories
                 .FirstOrDefaultAsync(c => c.Id == id);
         }
 
+        public async Task<Cliente> Add(Cliente cliente)
+        {
+            await _context.Clientes.AddAsync(cliente);
+            await _context.SaveChangesAsync();
+            return cliente;
+        }
     }
 }

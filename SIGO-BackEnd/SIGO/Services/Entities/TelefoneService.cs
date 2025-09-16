@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using SIGO.Data.Interfaces;
+using SIGO.Data.Repositories;
 using SIGO.Objects.Dtos.Entities;
 using SIGO.Objects.Models;
 using SIGO.Services.Interfaces;
@@ -16,6 +17,12 @@ namespace SIGO.Services.Entities
         {
             _telefoneRepository = telefoneRepository;
             _mapper = mapper;
+        }
+
+        public async Task<IEnumerable<TelefoneDTO>> GetTelefoneByNome(string nome)
+        {
+            var entities = await _telefoneRepository.GetTelefoneByNome(nome);
+            return _mapper.Map<IEnumerable<TelefoneDTO>>(entities);
         }
     }
 }

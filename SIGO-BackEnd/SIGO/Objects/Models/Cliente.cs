@@ -18,9 +18,6 @@ namespace SIGO.Objects.Models
         [Column("senha")]
         public string Senha { get; set; }
 
-        [Column("data")]
-        public DateOnly Data { get; set; }
-
         [Column("cpf_cnpj")]
         public string Cpf_Cnpj { get; set; }
 
@@ -30,19 +27,38 @@ namespace SIGO.Objects.Models
         [Column("razao")]
         public string Razao { get; set; }
 
-        [Column("situacao")]
-        public Situacao Situacao { get; set; }
+        [Column("datanasc")]
+        public DateOnly? DataNasc { get; set; }
 
         [Column("sexo")]
         public Sexo Sexo { get; set; }
 
-        [Column("datanasc")]
-        public DateOnly DataNasc { get; set; }
+        [Column("numero")]
+        public int Numero { get; set; }
 
-        [Column("TipoCliente")]
+        [Column("rua")]
+        public string Rua { get; set; }
+
+        [Column("cidade")]
+        public string Cidade { get; set; }
+
+        [Column("cep")]
+        public int Cep { get; set; }
+
+        [Column("bairro")]
+        public string Bairro { get; set; }
+
+        [Column("estado")]
+        public string Estado { get; set; }
+
+        [Column("pais")]
+        public string Pais { get; set; }
+
+        [Column("tipocliente")]
         public TipoCliente TipoCliente { get; set; }
 
-        public ICollection<EnderecoCliente> EnderecoClientes { get; set; } = new List<EnderecoCliente>();
+        [Column("situacao")]
+        public Situacao Situacao { get; set; }
 
         public ICollection<Telefone> Telefones { get; set; } = new List<Telefone>();
 
@@ -51,17 +67,23 @@ namespace SIGO.Objects.Models
         {
 
         }
-        public Cliente(int id, string nome, string email, string senha, DateOnly data, Situacao situacao, string razao, Sexo sexo, TipoCliente tipoCliente)
+        public Cliente(int id, string nome, string email, string senha, DateOnly data, Situacao situacao, string razao, Sexo sexo, TipoCliente tipoCliente, int numero, string rua, string cidade, int cep, string bairro, string estado, string pais)
         {
             Id = id;
             Nome = nome;
             Email = email;
             Senha = senha;
-            Data = data;
             Situacao = situacao;
             Razao = razao;
             Sexo = sexo;
             TipoCliente = tipoCliente;
+            Numero = numero;
+            Rua = rua;
+            Cidade = cidade;
+            Cep = cep;
+            Bairro = bairro;
+            Estado = estado;
+            Pais = pais;
         }
     }
 }

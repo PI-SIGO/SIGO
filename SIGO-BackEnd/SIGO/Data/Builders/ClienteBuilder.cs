@@ -11,13 +11,20 @@ namespace SIGO.Data.Builders
             modelBuilder.Entity<Cliente>().Property(c => c.Nome).IsRequired().HasMaxLength(100);
             modelBuilder.Entity<Cliente>().Property(c => c.Email).IsRequired().HasMaxLength(100);
             modelBuilder.Entity<Cliente>().Property(c => c.Senha).IsRequired().HasMaxLength(100);
-            modelBuilder.Entity<Cliente>().Property(c => c.Data).IsRequired();
             modelBuilder.Entity<Cliente>().Property(c => c.Obs).HasMaxLength(500);
             modelBuilder.Entity<Cliente>().Property(c => c.Razao).HasMaxLength(500);
             modelBuilder.Entity<Cliente>().Property(c => c.Cpf_Cnpj).IsRequired().HasMaxLength(14);
-            modelBuilder.Entity<Cliente>().Property(c => c.DataNasc).IsRequired();
+            modelBuilder.Entity<Cliente>().Property(c => c.DataNasc);
+            modelBuilder.Entity<Cliente>().Property(c => c.Numero).IsRequired();
+            modelBuilder.Entity<Cliente>().Property(c => c.Rua).IsRequired().HasMaxLength(500);
+            modelBuilder.Entity<Cliente>().Property(c => c.Cidade).IsRequired().HasMaxLength(500);
+            modelBuilder.Entity<Cliente>().Property(c => c.Cep).IsRequired();
+            modelBuilder.Entity<Cliente>().Property(c => c.Bairro).IsRequired().HasMaxLength(500);
+            modelBuilder.Entity<Cliente>().Property(c => c.Estado).IsRequired().HasMaxLength(500);
+            modelBuilder.Entity<Cliente>().Property(c => c.Pais).IsRequired().HasMaxLength(500);
+
             modelBuilder.Entity<Cliente>().Property(c => c.Situacao).IsRequired();
-            modelBuilder.Entity<Cliente>().Property(c => c.Sexo).IsRequired();
+            modelBuilder.Entity<Cliente>().Property(c => c.Sexo);
             modelBuilder.Entity<Cliente>().Property(c => c.TipoCliente).IsRequired();
         }
     }
