@@ -1,15 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using SIGO.Objects.Enums;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SIGO.Objects.Models
 {
-    public enum Status
-    {
-        Pendente = 0,
-        AguardandoPecas = 1,
-        EmAndamento = 2,
-        Concluido = 3
-    }
-
     [Table("veiculo")]
     public class Veiculo
     {
@@ -21,9 +14,6 @@ namespace SIGO.Objects.Models
 
         [Column("tipo")]
         public string TipoVeiculo { get; set; }
-
-        [Column("cor")]
-        public string CorVeiculo { get; set; }
 
         [Column("placa")]
         public string PlacaVeiculo { get; set; }
@@ -45,5 +35,29 @@ namespace SIGO.Objects.Models
 
         [Column("status")]
         public Status Status { get; set; }
+
+        [Column("Cliente")]
+        public ICollection<Cliente> Cliente { get; set; } = new List<Cliente>();
+
+        [Column("cor")]
+        public ICollection<Cor> Cor { get; set; } = new List<Cor>();
+
+        public Veiculo()
+        {
+
+        }
+        public Veiculo(int id, string nomeVeiculo, string tipoVeiculo, string placaVeiculo, string chassiVeiculo, int anoFab, int quilometragem, string combustivel, string seguro, Status status)  
+        {
+            Id = id;
+            NomeVeiculo = nomeVeiculo;
+            TipoVeiculo = tipoVeiculo;
+            PlacaVeiculo = placaVeiculo;
+            ChassiVeiculo = chassiVeiculo;
+            AnoFab = anoFab;
+            Quilometragem = quilometragem;
+            Combustivel = combustivel;
+            Seguro = seguro;
+            Status = status;
+        }
     }
 }

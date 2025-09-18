@@ -46,8 +46,6 @@ namespace SIGO.Objects.Models
 
         public ICollection<Telefone> Telefones { get; set; } = new List<Telefone>();
 
-        public ICollection<Veiculo> Veiculos { get; set; } = new List<Veiculo>();
-
 
         public Cliente()
         {

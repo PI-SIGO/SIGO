@@ -12,6 +12,8 @@ namespace SIGO.Data
         public DbSet<Endereco> Enderecos { get; set; }
         public DbSet<Telefone> Telefones { get; set; }
         public DbSet<EnderecoCliente> EnderecoClientes { get; set; }
+        public DbSet<Veiculo> Veiculos { get; set; }
+        public DbSet<Cor> Cores { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -21,6 +23,8 @@ namespace SIGO.Data
             EnderecoBuilder.Build(modelBuilder);
             TelefoneBuilder.Build(modelBuilder);
             EnderecoClienteBuilder.Build(modelBuilder);
+            VeiculoBuilder.Build(modelBuilder);
+            CorBuilder.Build(modelBuilder);
         }
     }
 }
