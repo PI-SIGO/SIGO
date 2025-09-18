@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SIGO.Data;
@@ -11,9 +12,11 @@ using SIGO.Data;
 namespace SIGO.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250918190405_CRUDServico")]
+    partial class CRUDServico
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -163,37 +166,6 @@ namespace SIGO.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("servico");
-
-            modelBuilder.Entity("SIGO.Objects.Models.Marca", b =>
-                {
-                    b.Property<int>("IdMarca")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("idMarca");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdMarca"));
-
-                    b.Property<string>("DescMarca")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("character varying(500)")
-                        .HasColumnName("descMarca");
-
-                    b.Property<string>("NomeMarca")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
-                        .HasColumnName("nomeMarca");
-
-                    b.Property<string>("TipoMarca")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
-                        .HasColumnName("tipoMarca");
-
-                    b.HasKey("IdMarca");
-
-                    b.ToTable("marca");
                 });
 
             modelBuilder.Entity("SIGO.Objects.Models.Telefone", b =>

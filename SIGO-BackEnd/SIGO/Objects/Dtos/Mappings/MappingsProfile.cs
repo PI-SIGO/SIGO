@@ -16,6 +16,7 @@ namespace SIGO.Objects.Dtos.Mappings
             CreateMap<MarcaDTO, Marca>().ReverseMap();
 
 
+            CreateMap<Servico, ServicoDTO>().ReverseMap();
         }
     }
 }
