@@ -10,6 +10,7 @@ namespace SIGO.Data
 
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Telefone> Telefones { get; set; }
+        public DbSet<Servico> Servicos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -17,6 +18,7 @@ namespace SIGO.Data
 
             ClienteBuilder.Build(modelBuilder);
             TelefoneBuilder.Build(modelBuilder);
+            ServicoBuilder.Build(modelBuilder);
         }
     }
 }

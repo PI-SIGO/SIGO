@@ -14,6 +14,7 @@ namespace SIGO.Objects.Dtos.Mappings
 
             CreateMap<Telefone, TelefoneDTO>().ReverseMap();
 
+            CreateMap<Servico, ServicoDTO>().ReverseMap();
         }
     }
 }

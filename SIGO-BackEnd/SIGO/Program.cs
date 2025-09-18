@@ -28,6 +28,9 @@ builder.Services.AddScoped<IClienteService, ClienteService>();
 builder.Services.AddScoped<ITelefoneRepository, TelefoneRepository>();
 builder.Services.AddScoped<ITelefoneService, TelefoneService>();
 
+builder.Services.AddScoped<IServicoRepository, ServicoRepository>();
+builder.Services.AddScoped<IServicoService, ServicoService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
