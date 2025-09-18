@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using SIGO.Data.Builders;
 using SIGO.Objects.Models;
 
@@ -20,8 +20,10 @@ namespace SIGO.Data
 
             ClienteBuilder.Build(modelBuilder);
             TelefoneBuilder.Build(modelBuilder);
+
             VeiculoBuilder.Build(modelBuilder);
             CorBuilder.Build(modelBuilder);
+
         }
     }
 }
