@@ -5,6 +5,6 @@ namespace SIGO.Services.Interfaces
 {
     public interface ICorService : IGenericService<Cor, CorDTO>
     {
-        Task<IEnumerable<CorDTO>> GetByNome(string nome);
+        Task<IEnumerable<CorDTO>> GetByName(string nome);
     }
 }

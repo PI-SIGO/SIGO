@@ -12,18 +12,15 @@ namespace SIGO.Controllers
     {
         private readonly IVeiculoService _veiculoService;
         private readonly Response _response;
-        private readonly IMapper _mapper;
 
         public VeiculoController(IVeiculoService veiculoService, IMapper mapper)
         {
             _veiculoService = veiculoService;
-            _mapper = mapper;
             _response = new Response();
         }
 
-        // GET api/veiculo
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> Get()
         {
             var veiculos = await _veiculoService.GetAll();
 
@@ -34,56 +31,47 @@ namespace SIGO.Controllers
             return Ok(_response);
         }
 
-        // GET api/veiculo/placa/{placa}
         [HttpGet("placa/{placa}")]
         public async Task<IActionResult> GetByPlaca(string placa)
         {
             var veiculo = await _veiculoService.GetByPlaca(placa);
 
             if (veiculo is null)
-                return NotFound(new { Message = "Veículo não encontrado com essa placa" });
+                return NotFound(new { Message = "Veículo não encontrado" });
 
             return Ok(veiculo);
         }
 
-        // GET api/veiculo/tipo/{tipo}
         [HttpGet("tipo/{tipo}")]
         public async Task<IActionResult> GetByTipo(string tipo)
         {
             var veiculos = await _veiculoService.GetByTipo(tipo);
 
             if (!veiculos.Any())
-                return NotFound(new { Message = "Nenhum veículo encontrado desse tipo" });
+                return NotFound(new { Message = "Nenhum veículo encontrado com esse tipo" });
 
             return Ok(veiculos);
         }
 
-        // PUT api/veiculo/{id}
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] VeiculoDTO veiculoDto)
+        [HttpPost]
+        public async Task<IActionResult> Create(VeiculoDTO veiculoDto)
         {
-            if (veiculoDto == null)
-                return BadRequest(new { Message = "Dados inválidos" });
-
-            await _veiculoService.Update(veiculoDto, id);
-
-            _response.Code = ResponseEnum.SUCCESS;
-            _response.Data = veiculoDto;
-            _response.Message = "Veículo atualizado com sucesso";
-
-            return Ok(_response);
+            await _veiculoService.Create(veiculoDto);
+            return Ok(new { Message = "Veículo cadastrado com sucesso" });
         }
 
-        // DELETE api/veiculo/{id}
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, VeiculoDTO veiculoDto)
+        {
+            await _veiculoService.Update(veiculoDto, id);
+            return Ok(new { Message = "Veículo atualizado com sucesso" });
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             await _veiculoService.Remove(id);
-
-            _response.Code = ResponseEnum.SUCCESS;
-            _response.Message = "Veículo removido com sucesso";
-
-            return Ok(_response);
+            return Ok(new { Message = "Veículo removido com sucesso" });
         }
     }
 }

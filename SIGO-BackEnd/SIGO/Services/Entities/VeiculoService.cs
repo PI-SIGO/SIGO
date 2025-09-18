@@ -18,32 +18,22 @@ namespace SIGO.Services.Entities
             _mapper = mapper;
         }
 
-        // Sobrescrevendo GetAll se quiser incluir joins (ex: Cliente, Oficina, etc.)
-        public override async Task<IEnumerable<VeiculoDTO>> GetAll()
-        {
-            var entities = await _veiculoRepository.Get();
-            return _mapper.Map<IEnumerable<VeiculoDTO>>(entities);
-        }
-
-        // Busca por ID com mais detalhes
-        public async Task<VeiculoDTO?> GetByIdWithDetails(int id)
-        {
-            var entity = await _veiculoRepository.GetByIdWithDetails(id);
-            return _mapper.Map<VeiculoDTO?>(entity);
-        }
-
-        // Exemplo: buscar veículos por placa
         public async Task<VeiculoDTO?> GetByPlaca(string placa)
         {
             var entity = await _veiculoRepository.GetByPlaca(placa);
             return _mapper.Map<VeiculoDTO?>(entity);
         }
 
-        // Exemplo: buscar veículos por tipo (Carro, Moto, etc.)
         public async Task<IEnumerable<VeiculoDTO>> GetByTipo(string tipo)
         {
             var entities = await _veiculoRepository.GetByTipo(tipo);
             return _mapper.Map<IEnumerable<VeiculoDTO>>(entities);
+        }
+
+        public async Task<VeiculoDTO?> GetById(int id)
+        {
+            var entity = await _veiculoRepository.GetById(id);
+            return _mapper.Map<VeiculoDTO?>(entity);
         }
     }
 }

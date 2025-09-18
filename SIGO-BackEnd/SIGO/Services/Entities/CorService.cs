@@ -18,10 +18,16 @@ namespace SIGO.Services.Entities
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<CorDTO>> GetByNome(string nome)
+        public async Task<IEnumerable<CorDTO>> GetByName(string nome)
         {
             var entities = await _corRepository.GetByNome(nome);
             return _mapper.Map<IEnumerable<CorDTO>>(entities);
+        }
+
+        public async Task<CorDTO?> GetById(int id)
+        {
+            var entity = await _corRepository.GetById(id);
+            return _mapper.Map<CorDTO?>(entity);
         }
     }
 }

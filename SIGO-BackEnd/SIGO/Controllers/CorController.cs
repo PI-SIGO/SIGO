@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SIGO.Objects.Contracts;
+using SIGO.Objects.Dtos.Entities;
 using SIGO.Services.Interfaces;
 
 namespace SIGO.Controllers
@@ -11,18 +12,15 @@ namespace SIGO.Controllers
     {
         private readonly ICorService _corService;
         private readonly Response _response;
-        private readonly IMapper _mapper;
 
         public CorController(ICorService corService, IMapper mapper)
         {
             _corService = corService;
-            _mapper = mapper;
             _response = new Response();
         }
 
-        // GET api/cor
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> Get()
         {
             var cores = await _corService.GetAll();
 
@@ -33,16 +31,36 @@ namespace SIGO.Controllers
             return Ok(_response);
         }
 
-        // GET api/cor/nome/{nome}
         [HttpGet("nome/{nome}")]
-        public async Task<IActionResult> GetByNome(string nome)
+        public async Task<IActionResult> GetByName(string nome)
         {
-            var cores = await _corService.GetByNome(nome);
+            var cores = await _corService.GetByName(nome);
 
             if (!cores.Any())
-                return NotFound(new { Message = "Nenhuma cor encontrada com esse nome" });
+                return NotFound(new { Message = "Nenhuma cor encontrada" });
 
             return Ok(cores);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(CorDTO corDto)
+        {
+            await _corService.Create(corDto);
+            return Ok(new { Message = "Cor cadastrada com sucesso" });
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, CorDTO corDto)
+        {
+            await _corService.Update(corDto, id);
+            return Ok(new { Message = "Cor atualizada com sucesso" });
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _corService.Remove(id);
+            return Ok(new { Message = "Cor removida com sucesso" });
         }
     }
 }

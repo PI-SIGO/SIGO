@@ -13,26 +13,33 @@ namespace SIGO.Data.Repositories
             _context = context;
         }
 
-        public async Task<Veiculo?> GetByIdWithDetails(int id)
+        public override async Task<IEnumerable<Veiculo>> Get()
         {
             return await _context.Veiculos
-                .Include(v => v.Cor) // só traz as cores
-                .FirstOrDefaultAsync(v => v.Id == id);
+                .Include(v => v.Cor) // inclui cores relacionadas
+                .ToListAsync();
         }
 
         public async Task<Veiculo?> GetByPlaca(string placa)
         {
             return await _context.Veiculos
-                .Include(v => v.Cor) // opcional, se quiser já trazer cores junto
+                .Include(v => v.Cor)
                 .FirstOrDefaultAsync(v => v.PlacaVeiculo == placa);
         }
 
         public async Task<IEnumerable<Veiculo>> GetByTipo(string tipo)
         {
             return await _context.Veiculos
-                .Include(v => v.Cor) // opcional também
+                .Include(v => v.Cor)
                 .Where(v => v.TipoVeiculo == tipo)
                 .ToListAsync();
+        }
+
+        public async Task<Veiculo?> GetById(int id)
+        {
+            return await _context.Veiculos
+                .Include(v => v.Cor)
+                .FirstOrDefaultAsync(v => v.Id == id);
         }
     }
 }

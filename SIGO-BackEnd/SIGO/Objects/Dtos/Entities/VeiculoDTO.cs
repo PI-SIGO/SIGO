@@ -12,8 +12,6 @@
         public string Combustivel { get; set; }
         public string Seguro { get; set; }
         public int Status { get; set; }
-
-        public List<ClienteDTO> Clientes { get; set; } = new();
         public List<CorDTO> Cores { get; set; } = new(); 
     }
 }
