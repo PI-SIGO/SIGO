@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SIGO.Data;
@@ -11,9 +12,11 @@ using SIGO.Data;
 namespace SIGO.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250918175311_addMarca")]
+    partial class addMarca
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -131,38 +134,6 @@ namespace SIGO.Migrations
 
                     b.ToTable("cliente");
                 });
-
-            modelBuilder.Entity("SIGO.Objects.Models.Servico", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Descricao")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("descricao");
-
-                    b.Property<DateOnly>("Garantia")
-                        .HasColumnType("date")
-                        .HasColumnName("garantia");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
-                        .HasColumnName("nome");
-
-                    b.Property<double>("Valor")
-                        .HasColumnType("double precision")
-                        .HasColumnName("valor");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("servico");
 
             modelBuilder.Entity("SIGO.Objects.Models.Marca", b =>
                 {

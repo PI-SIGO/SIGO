@@ -4,6 +4,7 @@ using SIGO.Data.Interfaces;
 using SIGO.Data.Repositories;
 using SIGO.Objects.Dtos.Mappings;
 using SIGO.Objects.Models;
+using SIGO.Services;
 using SIGO.Services.Entities;
 using SIGO.Services.Interfaces;
 using System;
@@ -24,12 +25,14 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 builder.Services.AddScoped<IClienteService, ClienteService>();
 
-
 builder.Services.AddScoped<ITelefoneRepository, TelefoneRepository>();
 builder.Services.AddScoped<ITelefoneService, TelefoneService>();
 
 builder.Services.AddScoped<IServicoRepository, ServicoRepository>();
 builder.Services.AddScoped<IServicoService, ServicoService>();
+
+builder.Services.AddScoped<IMarcaService, MarcaService>();
+builder.Services.AddScoped<IMarcaRepository, MarcaRepository>();
 
 var app = builder.Build();
 
