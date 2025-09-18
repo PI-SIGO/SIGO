@@ -16,8 +16,6 @@ namespace SIGO.Data.Repositories
         {
             return await _context.Clientes
                 .Include(c => c.Telefones)
-                .Include(c => c.EnderecoClientes)
-                    .ThenInclude(ec => ec.Endereco)
                 .ToListAsync();
         }
 
@@ -25,8 +23,6 @@ namespace SIGO.Data.Repositories
         {
             return await _context.Clientes
                 .Include(c => c.Telefones)
-                .Include(c => c.EnderecoClientes)
-                    .ThenInclude(ec => ec.Endereco)
                 .FirstOrDefaultAsync(c => c.Id == id);
         }
 
@@ -34,8 +30,6 @@ namespace SIGO.Data.Repositories
         {
             return await _context.Clientes
                 .Include(c => c.Telefones)
-                .Include(c => c.EnderecoClientes)
-                    .ThenInclude(ec => ec.Endereco)
                 .Where(c => c.Nome.Contains(nome))
                 .ToListAsync();
         }
@@ -46,5 +40,11 @@ namespace SIGO.Data.Repositories
                 .FirstOrDefaultAsync(c => c.Id == id);
         }
 
+        public async Task<Cliente> Add(Cliente cliente)
+        {
+            await _context.Clientes.AddAsync(cliente);
+            await _context.SaveChangesAsync();
+            return cliente;
+        }
     }
 }

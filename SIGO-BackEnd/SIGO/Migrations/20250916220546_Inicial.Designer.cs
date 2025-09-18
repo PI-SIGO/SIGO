@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SIGO.Data;
@@ -11,9 +12,11 @@ using SIGO.Data;
 namespace SIGO.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250916220546_Inicial")]
+    partial class Inicial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,8 +36,7 @@ namespace SIGO.Migrations
 
                     b.Property<string>("Bairro")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("character varying(500)")
+                        .HasColumnType("text")
                         .HasColumnName("bairro");
 
                     b.Property<int>("Cep")
@@ -43,8 +45,7 @@ namespace SIGO.Migrations
 
                     b.Property<string>("Cidade")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("character varying(500)")
+                        .HasColumnType("text")
                         .HasColumnName("cidade");
 
                     b.Property<string>("Cpf_Cnpj")
@@ -65,8 +66,7 @@ namespace SIGO.Migrations
 
                     b.Property<string>("Estado")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("character varying(500)")
+                        .HasColumnType("text")
                         .HasColumnName("estado");
 
                     b.Property<string>("Nome")
@@ -87,8 +87,7 @@ namespace SIGO.Migrations
 
                     b.Property<string>("Pais")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("character varying(500)")
+                        .HasColumnType("text")
                         .HasColumnName("pais");
 
                     b.Property<string>("Razao")
@@ -99,8 +98,7 @@ namespace SIGO.Migrations
 
                     b.Property<string>("Rua")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("character varying(500)")
+                        .HasColumnType("text")
                         .HasColumnName("rua");
 
                     b.Property<string>("Senha")
@@ -119,7 +117,7 @@ namespace SIGO.Migrations
 
                     b.Property<int>("TipoCliente")
                         .HasColumnType("integer")
-                        .HasColumnName("tipocliente");
+                        .HasColumnName("TipoCliente");
 
                     b.HasKey("Id");
 

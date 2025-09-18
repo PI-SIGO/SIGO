@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using SIGO.Data;
 using SIGO.Data.Interfaces;
 using SIGO.Data.Repositories;
+using SIGO.Objects.Dtos.Mappings;
 using SIGO.Objects.Models;
 using SIGO.Services.Entities;
 using SIGO.Services.Interfaces;
@@ -23,8 +24,6 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 builder.Services.AddScoped<IClienteService, ClienteService>();
 
-builder.Services.AddScoped<IEnderecoRepository, EnderecoRepository>();
-builder.Services.AddScoped<IEnderecoService, EnderecoService>();
 
 builder.Services.AddScoped<ITelefoneRepository, TelefoneRepository>();
 builder.Services.AddScoped<ITelefoneService, TelefoneService>();

@@ -12,8 +12,8 @@ using SIGO.Data;
 namespace SIGO.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250914024051_Inicial")]
-    partial class Inicial
+    [Migration("20250916221250_consertandoanomencaturadotipocliente")]
+    partial class consertandoanomencaturadotipocliente
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,17 +34,29 @@ namespace SIGO.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Bairro")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)")
+                        .HasColumnName("bairro");
+
+                    b.Property<int>("Cep")
+                        .HasColumnType("integer")
+                        .HasColumnName("cep");
+
+                    b.Property<string>("Cidade")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)")
+                        .HasColumnName("cidade");
+
                     b.Property<string>("Cpf_Cnpj")
                         .IsRequired()
                         .HasMaxLength(14)
                         .HasColumnType("character varying(14)")
                         .HasColumnName("cpf_cnpj");
 
-                    b.Property<DateOnly>("Data")
-                        .HasColumnType("date")
-                        .HasColumnName("data");
-
-                    b.Property<DateOnly>("DataNasc")
+                    b.Property<DateOnly?>("DataNasc")
                         .HasColumnType("date")
                         .HasColumnName("datanasc");
 
@@ -54,11 +66,21 @@ namespace SIGO.Migrations
                         .HasColumnType("character varying(100)")
                         .HasColumnName("email");
 
+                    b.Property<string>("Estado")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)")
+                        .HasColumnName("estado");
+
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)")
                         .HasColumnName("nome");
+
+                    b.Property<int>("Numero")
+                        .HasColumnType("integer")
+                        .HasColumnName("numero");
 
                     b.Property<string>("Obs")
                         .IsRequired()
@@ -66,11 +88,23 @@ namespace SIGO.Migrations
                         .HasColumnType("character varying(500)")
                         .HasColumnName("obs");
 
+                    b.Property<string>("Pais")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)")
+                        .HasColumnName("pais");
+
                     b.Property<string>("Razao")
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("character varying(500)")
                         .HasColumnName("razao");
+
+                    b.Property<string>("Rua")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)")
+                        .HasColumnName("rua");
 
                     b.Property<string>("Senha")
                         .IsRequired()
@@ -88,87 +122,11 @@ namespace SIGO.Migrations
 
                     b.Property<int>("TipoCliente")
                         .HasColumnType("integer")
-                        .HasColumnName("TipoCliente");
+                        .HasColumnName("tipocliente");
 
                     b.HasKey("Id");
 
                     b.ToTable("cliente");
-                });
-
-            modelBuilder.Entity("SIGO.Objects.Models.Endereco", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Bairro")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
-                        .HasColumnName("bairro");
-
-                    b.Property<int>("Cep")
-                        .HasMaxLength(100)
-                        .HasColumnType("integer")
-                        .HasColumnName("cep");
-
-                    b.Property<string>("Cidade")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
-                        .HasColumnName("cidade");
-
-                    b.Property<string>("Estado")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
-                        .HasColumnName("estado");
-
-                    b.Property<int>("Numero")
-                        .HasColumnType("integer")
-                        .HasColumnName("numero");
-
-                    b.Property<string>("Pais")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
-                        .HasColumnName("pais");
-
-                    b.Property<string>("Rua")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
-                        .HasColumnName("rua");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("endereco");
-                });
-
-            modelBuilder.Entity("SIGO.Objects.Models.EnderecoCliente", b =>
-                {
-                    b.Property<int>("ClienteId")
-                        .HasColumnType("integer")
-                        .HasColumnName("clienteid");
-
-                    b.Property<int>("EnderecoId")
-                        .HasColumnType("integer")
-                        .HasColumnName("enderecoid");
-
-                    b.Property<string>("Complemento")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
-                        .HasColumnName("complemento");
-
-                    b.HasKey("ClienteId", "EnderecoId");
-
-                    b.HasIndex("EnderecoId");
-
-                    b.ToTable("EnderecoClientes");
                 });
 
             modelBuilder.Entity("SIGO.Objects.Models.Telefone", b =>
@@ -202,25 +160,6 @@ namespace SIGO.Migrations
                     b.ToTable("telefone");
                 });
 
-            modelBuilder.Entity("SIGO.Objects.Models.EnderecoCliente", b =>
-                {
-                    b.HasOne("SIGO.Objects.Models.Cliente", "Cliente")
-                        .WithMany("EnderecoClientes")
-                        .HasForeignKey("ClienteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SIGO.Objects.Models.Endereco", "Endereco")
-                        .WithMany("EnderecoClientes")
-                        .HasForeignKey("EnderecoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Cliente");
-
-                    b.Navigation("Endereco");
-                });
-
             modelBuilder.Entity("SIGO.Objects.Models.Telefone", b =>
                 {
                     b.HasOne("SIGO.Objects.Models.Cliente", "Clientes")
@@ -234,14 +173,7 @@ namespace SIGO.Migrations
 
             modelBuilder.Entity("SIGO.Objects.Models.Cliente", b =>
                 {
-                    b.Navigation("EnderecoClientes");
-
                     b.Navigation("Telefones");
-                });
-
-            modelBuilder.Entity("SIGO.Objects.Models.Endereco", b =>
-                {
-                    b.Navigation("EnderecoClientes");
                 });
 #pragma warning restore 612, 618
         }
