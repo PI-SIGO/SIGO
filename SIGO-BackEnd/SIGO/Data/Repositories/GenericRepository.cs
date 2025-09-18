@@ -59,9 +59,9 @@ namespace SIGO.Data.Repositories
             await SaveChanges();
         }
 
-        public async Task<bool> SaveChanges()
-        {
-            return await _context.SaveChangesAsync() > 0;
-        }
+            public async Task<int> SaveChanges()
+            {
+                return await _context.SaveChangesAsync();
+            }
     }
 }

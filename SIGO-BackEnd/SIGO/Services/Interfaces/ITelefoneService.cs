@@ -5,6 +5,6 @@ namespace SIGO.Services.Interfaces
 {
     public interface ITelefoneService : IGenericService<Telefone, TelefoneDTO>
     {
-    
+        Task<IEnumerable<TelefoneDTO>> GetTelefoneByNome(string nome);
     }
 }

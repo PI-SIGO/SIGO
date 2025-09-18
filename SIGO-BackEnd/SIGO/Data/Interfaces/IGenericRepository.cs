@@ -7,6 +7,6 @@
         Task Add(T entity);
         Task Update(T entity);
         Task Remove(T entity);
-        Task<bool> SaveChanges();
+        Task<int> SaveChanges();
     }
 }
