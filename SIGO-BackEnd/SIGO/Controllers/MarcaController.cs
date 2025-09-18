@@ -1,6 +1,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SIGO.Objects.Contracts;
+using SIGO.Objects.Dtos.Entities;
 using SIGO.Services.Interfaces;
 
 namespace SIGO.Controllers
@@ -49,7 +50,7 @@ namespace SIGO.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] MarcaDTO marcaDTO)
+        public async Task<IActionResult> Create([FromBody]  MarcaDTO marcaDTO)
         {
             await _marcaService.Create(marcaDTO);
             _response.Code = ResponseEnum.SUCCESS;
