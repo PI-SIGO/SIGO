@@ -13,6 +13,8 @@ namespace SIGO.Objects.Dtos.Mappings
                 .ReverseMap();
 
             CreateMap<Telefone, TelefoneDTO>().ReverseMap();
+            CreateMap<MarcaDTO, Marca>().ReverseMap();
+
 
         }
     }
