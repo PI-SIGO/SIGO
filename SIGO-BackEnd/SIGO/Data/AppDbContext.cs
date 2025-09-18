@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using SIGO.Data.Builders;
 using SIGO.Objects.Models;
 
@@ -10,6 +10,8 @@ namespace SIGO.Data
 
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Telefone> Telefones { get; set; }
+        public DbSet<Marca> Marcas { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -17,6 +19,8 @@ namespace SIGO.Data
 
             ClienteBuilder.Build(modelBuilder);
             TelefoneBuilder.Build(modelBuilder);
+            MarcaBuilder.Build(modelBuilder);
+
         }
     }
 }
