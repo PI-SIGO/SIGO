@@ -4,7 +4,7 @@ using SIGO.Objects.Models;
 using SIGO.Objects.Dtos.Entities;
 using SIGO.Services.Interfaces;
 
-namespace SIGO.Services
+namespace SIGO.Services.Entities
 {
     public class MarcaService : IMarcaService
     {

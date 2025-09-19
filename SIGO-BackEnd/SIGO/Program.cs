@@ -4,7 +4,6 @@ using SIGO.Data.Interfaces;
 using SIGO.Data.Repositories;
 using SIGO.Objects.Dtos.Mappings;
 using SIGO.Objects.Models;
-using SIGO.Services;
 using SIGO.Services.Entities;
 using SIGO.Services.Interfaces;
 using System;
@@ -39,6 +38,9 @@ builder.Services.AddScoped<IVeiculoRepository, VeiculoRepository>();
 
 builder.Services.AddScoped<ICorService, CorService>();
 builder.Services.AddScoped<ICorRepository, CorRepository>();
+
+builder.Services.AddScoped<IFuncionarioService, FuncionarioService>();
+builder.Services.AddScoped<IFuncionarioRepository, FuncionarioRepository>();
 
 var app = builder.Build();
 

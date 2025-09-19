@@ -12,8 +12,8 @@ using SIGO.Data;
 namespace SIGO.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250918190756_corrigindoCRUDservico")]
-    partial class corrigindoCRUDservico
+    [Migration("20250919172824_addFuncionario")]
+    partial class addFuncionario
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -130,9 +130,111 @@ namespace SIGO.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("tipocliente");
 
+                    b.Property<int?>("VeiculoId")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("VeiculoId");
+
                     b.ToTable("cliente");
+                });
+
+            modelBuilder.Entity("SIGO.Objects.Models.Cor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("NomeCor")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<int?>("VeiculoId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("VeiculoId");
+
+                    b.ToTable("Cores");
+                });
+
+            modelBuilder.Entity("SIGO.Objects.Models.Funcionario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Cargo")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("cargo");
+
+                    b.Property<string>("Cpf")
+                        .IsRequired()
+                        .HasMaxLength(12)
+                        .HasColumnType("character varying(12)")
+                        .HasColumnName("cpf");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("email");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("nome");
+
+                    b.Property<int>("Situacao")
+                        .HasColumnType("integer")
+                        .HasColumnName("situacao");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("funcionario");
+                });
+
+            modelBuilder.Entity("SIGO.Objects.Models.Marca", b =>
+                {
+                    b.Property<int>("IdMarca")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("idMarca");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdMarca"));
+
+                    b.Property<string>("DescMarca")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)")
+                        .HasColumnName("descMarca");
+
+                    b.Property<string>("NomeMarca")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("nomeMarca");
+
+                    b.Property<string>("TipoMarca")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("tipoMarca");
+
+                    b.HasKey("IdMarca");
+
+                    b.ToTable("marca");
                 });
 
             modelBuilder.Entity("SIGO.Objects.Models.Servico", b =>
@@ -199,6 +301,82 @@ namespace SIGO.Migrations
                     b.ToTable("telefone");
                 });
 
+            modelBuilder.Entity("SIGO.Objects.Models.Veiculo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AnoFab")
+                        .HasColumnType("integer")
+                        .HasColumnName("ano");
+
+                    b.Property<string>("ChassiVeiculo")
+                        .IsRequired()
+                        .HasMaxLength(17)
+                        .HasColumnType("character varying(17)")
+                        .HasColumnName("chassi");
+
+                    b.Property<string>("Combustivel")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("character varying(30)")
+                        .HasColumnName("combustivel");
+
+                    b.Property<string>("NomeVeiculo")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("nome");
+
+                    b.Property<string>("PlacaVeiculo")
+                        .IsRequired()
+                        .HasMaxLength(8)
+                        .HasColumnType("character varying(8)")
+                        .HasColumnName("placa");
+
+                    b.Property<int>("Quilometragem")
+                        .HasColumnType("integer")
+                        .HasColumnName("quilometragem");
+
+                    b.Property<string>("Seguro")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("seguro");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer")
+                        .HasColumnName("status");
+
+                    b.Property<string>("TipoVeiculo")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("tipo");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("veiculo");
+                });
+
+            modelBuilder.Entity("SIGO.Objects.Models.Cliente", b =>
+                {
+                    b.HasOne("SIGO.Objects.Models.Veiculo", null)
+                        .WithMany("Cliente")
+                        .HasForeignKey("VeiculoId");
+                });
+
+            modelBuilder.Entity("SIGO.Objects.Models.Cor", b =>
+                {
+                    b.HasOne("SIGO.Objects.Models.Veiculo", null)
+                        .WithMany("Cor")
+                        .HasForeignKey("VeiculoId");
+                });
+
             modelBuilder.Entity("SIGO.Objects.Models.Telefone", b =>
                 {
                     b.HasOne("SIGO.Objects.Models.Cliente", "Clientes")
@@ -213,6 +391,13 @@ namespace SIGO.Migrations
             modelBuilder.Entity("SIGO.Objects.Models.Cliente", b =>
                 {
                     b.Navigation("Telefones");
+                });
+
+            modelBuilder.Entity("SIGO.Objects.Models.Veiculo", b =>
+                {
+                    b.Navigation("Cliente");
+
+                    b.Navigation("Cor");
                 });
 #pragma warning restore 612, 618
         }

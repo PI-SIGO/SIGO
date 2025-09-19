@@ -7,11 +7,28 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace SIGO.Migrations
 {
     /// <inheritdoc />
-    public partial class Inicial : Migration
+    public partial class addFuncionario : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "funcionario",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    nome = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    cpf = table.Column<string>(type: "character varying(12)", maxLength: 12, nullable: false),
+                    cargo = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    email = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    situacao = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_funcionario", x => x.id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "marca",
                 columns: table => new
@@ -25,6 +42,22 @@ namespace SIGO.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_marca", x => x.idMarca);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "servico",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    nome = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    descricao = table.Column<string>(type: "text", nullable: false),
+                    valor = table.Column<double>(type: "double precision", nullable: false),
+                    garantia = table.Column<DateOnly>(type: "date", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_servico", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -147,7 +180,13 @@ namespace SIGO.Migrations
                 name: "Cores");
 
             migrationBuilder.DropTable(
+                name: "funcionario");
+
+            migrationBuilder.DropTable(
                 name: "marca");
+
+            migrationBuilder.DropTable(
+                name: "servico");
 
             migrationBuilder.DropTable(
                 name: "telefone");
