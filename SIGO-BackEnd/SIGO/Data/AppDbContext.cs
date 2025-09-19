@@ -11,6 +11,8 @@ namespace SIGO.Data
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Telefone> Telefones { get; set; }
         public DbSet<Marca> Marcas { get; set; }
+        public DbSet<Veiculo> Veiculos { get; set; }
+        public DbSet<Cor> Cores { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -20,7 +22,8 @@ namespace SIGO.Data
             ClienteBuilder.Build(modelBuilder);
             TelefoneBuilder.Build(modelBuilder);
             MarcaBuilder.Build(modelBuilder);
-
+            VeiculoBuilder.Build(modelBuilder);
+            CorBuilder.Build(modelBuilder);
         }
     }
 }

@@ -32,6 +32,12 @@ builder.Services.AddScoped<ITelefoneService, TelefoneService>();
 builder.Services.AddScoped<IMarcaService, MarcaService>();
 builder.Services.AddScoped<IMarcaRepository, MarcaRepository>();
 
+builder.Services.AddScoped<IVeiculoService, VeiculoService>();
+builder.Services.AddScoped<IVeiculoRepository, VeiculoRepository>();
+
+builder.Services.AddScoped<ICorService, CorService>();
+builder.Services.AddScoped<ICorRepository, CorRepository>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

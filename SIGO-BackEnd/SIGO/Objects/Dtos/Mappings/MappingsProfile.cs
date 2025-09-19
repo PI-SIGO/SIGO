@@ -15,6 +15,10 @@ namespace SIGO.Objects.Dtos.Mappings
             CreateMap<Telefone, TelefoneDTO>().ReverseMap();
             CreateMap<MarcaDTO, Marca>().ReverseMap();
 
+            CreateMap<Veiculo, VeiculoDTO>()
+                .ForMember(dest => dest.Cores, opt => opt.MapFrom(src => src.Cor))
+                .ReverseMap();
+            CreateMap<Cor, CorDTO>().ReverseMap();
 
         }
     }
