@@ -5,7 +5,7 @@ namespace SIGO.Services.Interfaces
 {
     public interface IVeiculoService : IGenericService<Veiculo, VeiculoDTO>
     {
-        Task<VeiculoDTO?> GetByPlaca(string placa);
+        Task<IEnumerable<VeiculoDTO>> GetByPlaca(string placa);
         Task<IEnumerable<VeiculoDTO>> GetByTipo(string tipo);
         Task UpdateVeiculo(VeiculoDTO veiculoDto, int id);
     }
