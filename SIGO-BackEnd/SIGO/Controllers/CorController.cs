@@ -37,24 +37,44 @@ namespace SIGO.Controllers
             var cores = await _corService.GetByName(nome);
 
             if (!cores.Any())
-                return NotFound(new { Message = "Nenhuma cor encontrada" });
+            {
+                _response.Code = ResponseEnum.NOT_FOUND;
+                _response.Data = null;
+                _response.Message = "Nenhuma cor encontrada";
+                return NotFound(_response);
+            }
 
-            return Ok(cores);
+            _response.Code = ResponseEnum.SUCCESS;
+            _response.Data = cores;
+            _response.Message = "Cores encontradas com sucesso";
+            return Ok(_response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(CorDTO corDto)
+        {
+            await _corService.Create(corDto);
+            return Ok(new { Message = "Cor cadastrada com sucesso" });
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] CorDTO corDto)
         {
             if (corDto == null)
-                return BadRequest("CorDTO não pode ser nulo");
+            {
+                _response.Code = ResponseEnum.INVALID;
+                _response.Data = null;
+                _response.Message = "Dados inválidos";
 
+                return BadRequest(_response);
+            }
             // força o id da URL no DTO (evita mismatch)
             corDto.Id = id;
 
             try
             {
                 await _corService.UpdateCor(corDto, id);
-                return NoContent(); // 204 apropriado para update sem corpo
+                return Ok(new { Message = "Cor atualizada com sucesso" });
             }
             catch (KeyNotFoundException)
             {
@@ -62,8 +82,7 @@ namespace SIGO.Controllers
             }
         }
 
-
-        [HttpDelete("{id}")]
+            [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             await _corService.Remove(id);

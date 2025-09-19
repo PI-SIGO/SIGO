@@ -34,23 +34,41 @@ namespace SIGO.Controllers
         [HttpGet("placa/{placa}")]
         public async Task<IActionResult> GetByPlaca(string placa)
         {
-            var veiculo = await _veiculoService.GetByPlaca(placa);
+            // Busca por placas que contenham a string fornecida
+            var veiculos = await _veiculoService.GetByPlaca(placa);
 
-            if (veiculo is null)
-                return NotFound(new { Message = "Veículo não encontrado" });
+            if (!veiculos.Any())
+            {
+                _response.Code = ResponseEnum.NOT_FOUND;
+                _response.Data = null;
+                _response.Message = "Nenhum veículo encontrado com essa placa";
+                return NotFound(_response);
+            }
 
-            return Ok(veiculo);
+            _response.Code = ResponseEnum.SUCCESS;
+            _response.Data = veiculos;
+            _response.Message = "Veículos encontrados com sucesso";
+            return Ok(_response);
         }
 
         [HttpGet("tipo/{tipo}")]
         public async Task<IActionResult> GetByTipo(string tipo)
         {
+            // Busca por tipos que contenham a string fornecida
             var veiculos = await _veiculoService.GetByTipo(tipo);
 
             if (!veiculos.Any())
-                return NotFound(new { Message = "Nenhum veículo encontrado com esse tipo" });
+            {
+                _response.Code = ResponseEnum.NOT_FOUND;
+                _response.Data = null;
+                _response.Message = "Nenhum veículo encontrado com esse tipo";
+                return NotFound(_response);
+            }
 
-            return Ok(veiculos);
+            _response.Code = ResponseEnum.SUCCESS;
+            _response.Data = veiculos;
+            _response.Message = "Veículos encontrados com sucesso";
+            return Ok(_response);
         }
 
         [HttpPost]
@@ -66,13 +84,14 @@ namespace SIGO.Controllers
             try
             {
                 await _veiculoService.UpdateVeiculo(veiculoDto, id);
-                return NoContent();
+                return Ok(new { Message = "Veículo atualizado com sucesso" });
             }
             catch (KeyNotFoundException ex)
             {
-                return NotFound(new { message = ex.Message });
+                return NotFound(new { Message = ex.Message });
             }
         }
+
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)

@@ -20,18 +20,19 @@ namespace SIGO.Data.Repositories
                 .ToListAsync();
         }
 
-        public async Task<Veiculo?> GetByPlaca(string placa)
+        public async Task<IEnumerable<Veiculo>> GetByPlaca(string placa)
         {
             return await _context.Veiculos
                 .Include(v => v.Cor)
-                .FirstOrDefaultAsync(v => v.PlacaVeiculo == placa);
+                .Where(v => v.PlacaVeiculo.Contains(placa))
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<Veiculo>> GetByTipo(string tipo)
         {
             return await _context.Veiculos
                 .Include(v => v.Cor)
-                .Where(v => v.TipoVeiculo == tipo)
+                .Where(v => v.TipoVeiculo.Contains(tipo))
                 .ToListAsync();
         }
 

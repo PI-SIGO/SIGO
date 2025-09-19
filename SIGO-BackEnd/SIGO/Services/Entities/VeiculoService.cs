@@ -18,10 +18,10 @@ namespace SIGO.Services.Entities
             _mapper = mapper;
         }
 
-        public async Task<VeiculoDTO?> GetByPlaca(string placa)
+        public async Task<IEnumerable<VeiculoDTO?>> GetByPlaca(string placa)
         {
             var entity = await _veiculoRepository.GetByPlaca(placa);
-            return _mapper.Map<VeiculoDTO?>(entity);
+            return _mapper.Map<IEnumerable<VeiculoDTO?>>(entity);
         }
 
         public async Task<IEnumerable<VeiculoDTO>> GetByTipo(string tipo)
