@@ -4,7 +4,6 @@ using SIGO.Data.Interfaces;
 using SIGO.Data.Repositories;
 using SIGO.Objects.Dtos.Mappings;
 using SIGO.Objects.Models;
-using SIGO.Services;
 using SIGO.Services.Entities;
 using SIGO.Services.Interfaces;
 using System;
@@ -33,6 +32,9 @@ builder.Services.AddScoped<IServicoService, ServicoService>();
 
 builder.Services.AddScoped<IMarcaService, MarcaService>();
 builder.Services.AddScoped<IMarcaRepository, MarcaRepository>();
+
+builder.Services.AddScoped<IFuncionarioService, FuncionarioService>();
+builder.Services.AddScoped<IFuncionarioRepository, FuncionarioRepository>();
 
 var app = builder.Build();
 

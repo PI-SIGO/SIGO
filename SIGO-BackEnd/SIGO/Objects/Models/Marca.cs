@@ -14,9 +14,6 @@ namespace SIGO.Objects.Models
         [Column("descMarca")]
         public string DescMarca { get; set; }
 
-        [Column("tipoMarca")]
-        public string TipoMarca { get; set; }
-
         public Marca() { }
 
         public Marca(int idMarca, string nomeMarca, string descMarca, string tipoMarca)
@@ -24,7 +21,6 @@ namespace SIGO.Objects.Models
             IdMarca = idMarca;
             NomeMarca = nomeMarca;
             DescMarca = descMarca;
-            TipoMarca = tipoMarca;
         }
     }
 }

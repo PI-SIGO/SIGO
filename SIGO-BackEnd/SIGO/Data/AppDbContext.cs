@@ -13,6 +13,8 @@ namespace SIGO.Data
         public DbSet<Servico> Servicos { get; set; }
         public DbSet<Marca> Marcas { get; set; }
 
+        public DbSet<Funcionario> Funcionarios { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -21,6 +23,7 @@ namespace SIGO.Data
             TelefoneBuilder.Build(modelBuilder);
             ServicoBuilder.Build(modelBuilder);
             MarcaBuilder.Build(modelBuilder);
+            FuncionarioBuilder.Build(modelBuilder);
         }
     }
 }

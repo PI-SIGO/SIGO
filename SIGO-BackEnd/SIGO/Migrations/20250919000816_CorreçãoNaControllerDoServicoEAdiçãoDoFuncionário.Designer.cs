@@ -12,8 +12,8 @@ using SIGO.Data;
 namespace SIGO.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250918190756_corrigindoCRUDservico")]
-    partial class corrigindoCRUDservico
+    [Migration("20250919000816_CorreçãoNaControllerDoServicoEAdiçãoDoFuncionário")]
+    partial class CorreçãoNaControllerDoServicoEAdiçãoDoFuncionário
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -133,6 +133,74 @@ namespace SIGO.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("cliente");
+                });
+
+            modelBuilder.Entity("SIGO.Objects.Models.Funcionario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Cargo")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("cargo");
+
+                    b.Property<string>("Cpf")
+                        .IsRequired()
+                        .HasMaxLength(12)
+                        .HasColumnType("character varying(12)")
+                        .HasColumnName("cpf");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("email");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("nome");
+
+                    b.Property<int>("Situacao")
+                        .HasColumnType("integer")
+                        .HasColumnName("situacao");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("funcionario");
+                });
+
+            modelBuilder.Entity("SIGO.Objects.Models.Marca", b =>
+                {
+                    b.Property<int>("IdMarca")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("idMarca");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdMarca"));
+
+                    b.Property<string>("DescMarca")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)")
+                        .HasColumnName("descMarca");
+
+                    b.Property<string>("NomeMarca")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("nomeMarca");
+
+                    b.HasKey("IdMarca");
+
+                    b.ToTable("marca");
                 });
 
             modelBuilder.Entity("SIGO.Objects.Models.Servico", b =>

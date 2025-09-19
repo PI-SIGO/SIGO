@@ -10,57 +10,57 @@ namespace SIGO.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ServicoController : ControllerBase
+    public class FuncionarioController : ControllerBase
     {
-        private readonly IServicoService _servicoService;
+        private readonly IFuncionarioService _funcionarioService;
         private readonly Response _response;
         private readonly IMapper _mapper;
 
-        public ServicoController(IServicoService servicoService, IMapper mapper)
+        public FuncionarioController(IFuncionarioService funcionarioService, IMapper mapper)
         {
-            _servicoService = servicoService;
+            _funcionarioService = funcionarioService;
             _mapper = mapper;
             _response = new Response();
         }
 
-        [HttpGet("GetServico")]
+        [HttpGet("GetFuncionario")]
         public async Task<IActionResult> GetAll()
         {
-            var servicoDTO = await _servicoService.GetAll();
+            var funcionarioDTO = await _funcionarioService.GetAll();
 
             _response.Code = ResponseEnum.SUCCESS;
-            _response.Data = servicoDTO;
-            _response.Message = "Serviços listados com sucesso";
+            _response.Data = funcionarioDTO;
+            _response.Message = "Funcionários listados com sucesso";
 
             return Ok(_response);
         }
 
-        [HttpGet("GetServicoById{id}")]
-        public async Task<IActionResult> GetByIdWithDetails(int id)
+        [HttpGet("GetFuncionarioById{id}")]
+        public async Task<IActionResult> GetFuncionarioById(int id)
         {
-            var servicoDto = await _servicoService.GetByIdWithDetails(id);
+            var clienteDto = await _funcionarioService.GetById(id);
 
-            if (servicoDto is null)
-                return NotFound(new { Message = "Serviço não encontrado" });
+            if (clienteDto is null)
+                return NotFound(new { Message = "Funcionário não encontrado" });
 
-            return Ok(servicoDto);
+            return Ok(clienteDto);
         }
 
-        [HttpGet("GetServicoByhNome/{nome}")]
-        public async Task<IActionResult> GetByNameWithDetails(string nome)
+        [HttpGet("GetFuncionarioByNome/{nome}")]
+        public async Task<IActionResult> GetFuncionarioByNome(string nome)
         {
-            var servicoDto = await _servicoService.GetByNameWithDetails(nome);
+            var clientesDto = await _funcionarioService.GetFuncionarioByNome(nome);
 
-            if (!servicoDto.Any())
-                return NotFound(new { Message = "Nenhum serviço encontrado com esse nome" });
+            if (!clientesDto.Any())
+                return NotFound(new { Message = "Nenhum funcionário encontrado com esse nome" });
 
-            return Ok(servicoDto);
+            return Ok(clientesDto);
         }
 
-        [HttpPost("PostService")]
-        public async Task<IActionResult> Post(ServicoDTO serviceDTO)
+        [HttpPost("PostFuncionario")]
+        public async Task<IActionResult> Post(FuncionarioDTO funcionarioDTO)
         {
-            if (serviceDTO is null)
+            if (funcionarioDTO is null)
             {
                 _response.Code = ResponseEnum.INVALID;
                 _response.Data = null;
@@ -71,20 +71,20 @@ namespace SIGO.Controllers
 
             try
             {
-                serviceDTO.Id = 0;
+                funcionarioDTO.Id = 0;
 
-                await _servicoService.Create(serviceDTO);
+                await _funcionarioService.Create(funcionarioDTO);
 
                 _response.Code = ResponseEnum.SUCCESS;
-                _response.Data = serviceDTO;
-                _response.Message = "Serviço cadastrado com sucesso";
+                _response.Data = funcionarioDTO;
+                _response.Message = "Funcionário cadastrado com sucesso";
 
                 return Ok(_response);
             }
             catch (Exception ex)
             {
                 _response.Code = ResponseEnum.ERROR;
-                _response.Message = "Não foi possível cadastrar o serviço";
+                _response.Message = "Não foi possível cadastrar o funcionário";
                 _response.Data = new
                 {
                     ErrorMessage = ex.Message,
@@ -94,10 +94,10 @@ namespace SIGO.Controllers
             }
         }
 
-        [HttpPut("PutServico{id}")]
-        public async Task<IActionResult> Put(int id, ServicoDTO servicoDTO)
+        [HttpPut("PutFuncionario{id}")]
+        public async Task<IActionResult> Put(int id, FuncionarioDTO funcionarioDTO)
         {
-            if (servicoDTO is null)
+            if (funcionarioDTO is null)
             {
                 _response.Code = ResponseEnum.INVALID;
                 _response.Data = null;
@@ -108,27 +108,27 @@ namespace SIGO.Controllers
 
             try
             {
-                var existingServiceDTO = await _servicoService.GetById(id);
-                if (existingServiceDTO is null)
+                var existingFuncionarioDTO = await _funcionarioService.GetById(id);
+                if (existingFuncionarioDTO is null)
                 {
                     _response.Code = ResponseEnum.NOT_FOUND;
                     _response.Data = null;
-                    _response.Message = "O serviço informado não existe";
+                    _response.Message = "O funcionário informado não existe";
                     return NotFound(_response);
                 }
 
-                await _servicoService.Update(servicoDTO, id);
+                await _funcionarioService.Update(funcionarioDTO, id);
 
                 _response.Code = ResponseEnum.SUCCESS;
-                _response.Data = servicoDTO;
-                _response.Message = "Serviço atualizado com sucesso";
+                _response.Data = funcionarioDTO;
+                _response.Message = "Funcionário atualizado com sucesso";
 
                 return Ok(_response);
             }
             catch (Exception ex)
             {
                 _response.Code = ResponseEnum.ERROR;
-                _response.Message = "Ocorreu um erro ao tentar atualizar os dados do serviço";
+                _response.Message = "Ocorreu um erro ao tentar atualizar os dados do funcionário";
                 _response.Data = new
                 {
                     ErrorMessage = ex.Message,
@@ -138,32 +138,32 @@ namespace SIGO.Controllers
             }
         }
 
-        [HttpDelete("DeleteServico{id}")]
+        [HttpDelete("DeleteFuncionario{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             try
             {
-                var servicoDTO = await _servicoService.GetById(id);
+                var clienteDTO = await _funcionarioService.GetById(id);
 
-                if (servicoDTO is null)
+                if (clienteDTO is null)
                 {
                     _response.Code = ResponseEnum.NOT_FOUND;
                     _response.Data = null;
-                    _response.Message = "Serviço não encontrado";
+                    _response.Message = "Funcionário não encontrado";
                     return NotFound(_response);
                 }
 
-                await _servicoService.Remove(id);
+                await _funcionarioService.Remove(id);
 
                 _response.Code = ResponseEnum.SUCCESS;
                 _response.Data = null;
-                _response.Message = "Serviço deletado com sucesso";
+                _response.Message = "Funcionário deletado com sucesso";
                 return Ok(_response);
             }
             catch (Exception ex)
             {
                 _response.Code = ResponseEnum.ERROR;
-                _response.Message = "Ocorreu um erro ao deletar o serviço";
+                _response.Message = "Ocorreu um erro ao deletar o funcionário";
                 _response.Data = new
                 {
                     ErrorMessage = ex.Message,
