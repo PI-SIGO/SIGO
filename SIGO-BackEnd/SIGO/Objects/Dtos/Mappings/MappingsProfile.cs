@@ -20,6 +20,7 @@ namespace SIGO.Objects.Dtos.Mappings
                 .ReverseMap();
             CreateMap<Cor, CorDTO>().ReverseMap();
 
+            CreateMap<Servico, ServicoDTO>().ReverseMap();
         }
     }
 }
