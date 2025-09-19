@@ -24,17 +24,9 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 builder.Services.AddScoped<IClienteService, ClienteService>();
 
+
 builder.Services.AddScoped<ITelefoneRepository, TelefoneRepository>();
 builder.Services.AddScoped<ITelefoneService, TelefoneService>();
-
-builder.Services.AddScoped<IServicoRepository, ServicoRepository>();
-builder.Services.AddScoped<IServicoService, ServicoService>();
-
-builder.Services.AddScoped<IMarcaService, MarcaService>();
-builder.Services.AddScoped<IMarcaRepository, MarcaRepository>();
-
-builder.Services.AddScoped<IFuncionarioService, FuncionarioService>();
-builder.Services.AddScoped<IFuncionarioRepository, FuncionarioRepository>();
 
 var app = builder.Build();
 

@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace SIGO.Migrations
 {
     /// <inheritdoc />
-    public partial class RefazendoAMigration : Migration
+    public partial class Inicial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -27,50 +27,18 @@ namespace SIGO.Migrations
                     datanasc = table.Column<DateOnly>(type: "date", nullable: true),
                     sexo = table.Column<int>(type: "integer", nullable: false),
                     numero = table.Column<int>(type: "integer", nullable: false),
-                    rua = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: false),
-                    cidade = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: false),
+                    rua = table.Column<string>(type: "text", nullable: false),
+                    cidade = table.Column<string>(type: "text", nullable: false),
                     cep = table.Column<int>(type: "integer", nullable: false),
-                    bairro = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: false),
-                    estado = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: false),
-                    pais = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: false),
-                    complemento = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: false),
-                    tipocliente = table.Column<int>(type: "integer", nullable: false),
+                    bairro = table.Column<string>(type: "text", nullable: false),
+                    estado = table.Column<string>(type: "text", nullable: false),
+                    pais = table.Column<string>(type: "text", nullable: false),
+                    TipoCliente = table.Column<int>(type: "integer", nullable: false),
                     situacao = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_cliente", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "marca",
-                columns: table => new
-                {
-                    idMarca = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    nomeMarca = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    descMarca = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: false),
-                    tipoMarca = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_marca", x => x.idMarca);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "servico",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    nome = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    descricao = table.Column<string>(type: "text", nullable: false),
-                    valor = table.Column<double>(type: "double precision", nullable: false),
-                    garantia = table.Column<DateOnly>(type: "date", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_servico", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -103,12 +71,6 @@ namespace SIGO.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "marca");
-
-            migrationBuilder.DropTable(
-                name: "servico");
-
             migrationBuilder.DropTable(
                 name: "telefone");
 
